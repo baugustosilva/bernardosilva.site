@@ -208,6 +208,7 @@
       max-width: min(94vw, 1800px);
       padding: 0 8rem;
       pointer-events: auto;
+      touch-action: pan-y;
     }
 
     #lightbox img {
@@ -383,8 +384,8 @@
       <div class="gallery-item"><img src="img/grid/20250627-Cozinha-Tupis-4226.webp" loading="lazy"></div>
       <div class="gallery-item"><img src="img/grid/20250627-Cozinha-Tupis-4327.webp" loading="lazy"></div>
       <div class="gallery-item"><img src="img/grid/20250627-Cozinha-Tupis-4349.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/20250724-Forno-da-Saudade-4992.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/20250724-Forno-da-Saudade-5044.webp" loading="lazy"></div>
+      <div class="gallery-item" data-gallery="20250724-Forno-da-Saudade" data-start="3"><img src="img/grid/20250724-Forno-da-Saudade-4992.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-gallery="20250724-Forno-da-Saudade" data-start="4"><img src="img/grid/20250724-Forno-da-Saudade-5044.webp" loading="lazy" decoding="async"></div>
       <div class="gallery-item"><img src="img/grid/20250918-Cafe-Nice-7921.webp" loading="lazy"></div>
       <div class="gallery-item"><img src="img/grid/20250918-Cafe-Nice-7928.webp" loading="lazy"></div>
       <div class="gallery-item"><img src="img/grid/Casa-Alvorada-0128.webp" loading="lazy"></div>
@@ -503,6 +504,13 @@
           'img/20240228-Casinha-do-Jura/20240228-Casinha-do-Jura-7116.webp',
           'img/20240228-Casinha-do-Jura/20240228-Casinha-do-Jura-7133.webp',
           'img/20240228-Casinha-do-Jura/20240228-Casinha-do-Jura-7139.webp'
+        ],
+        '20250724-Forno-da-Saudade': [
+          'img/20250724-Forno-da-Saudade/20250724-Forno-da-Saudade-4593.webp',
+          'img/20250724-Forno-da-Saudade/20250724-Forno-da-Saudade-4771.webp',
+          'img/20250724-Forno-da-Saudade/20250724-Forno-da-Saudade-4977.webp',
+          'img/20250724-Forno-da-Saudade/20250724-Forno-da-Saudade-4990.webp',
+          'img/20250724-Forno-da-Saudade/20250724-Forno-da-Saudade-4993.webp'
         ]
       };
 
@@ -514,8 +522,11 @@
       const lbClose = document.getElementById('lightbox-close');
       const lbPrev = document.getElementById('lightbox-prev');
       const lbNext = document.getElementById('lightbox-next');
+      const lbTrack = document.getElementById('lightbox-track');
       let currentGallery = [];
       let current = 0;
+      let touchStartX = 0;
+      let touchStartY = 0;
 
       function getItemSrc(item) {
         const image = item.querySelector('img');
@@ -602,6 +613,31 @@
           closeLB();
         }
       });
+
+      lbTrack.addEventListener('touchstart', (e) => {
+        if (!lb.classList.contains('active') || !e.touches.length) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      lbTrack.addEventListener('touchend', (e) => {
+        if (!lb.classList.contains('active') || !e.changedTouches.length) return;
+
+        const deltaX = e.changedTouches[0].clientX - touchStartX;
+        const deltaY = e.changedTouches[0].clientY - touchStartY;
+        const swipeThreshold = 40;
+
+        if (Math.abs(deltaX) < swipeThreshold || Math.abs(deltaX) <= Math.abs(deltaY)) {
+          return;
+        }
+
+        if (deltaX < 0) {
+          nextLB();
+          return;
+        }
+
+        prevLB();
+      }, { passive: true });
 
       document.addEventListener('keydown', (e) => {
         if (!lb.classList.contains('active')) return;
