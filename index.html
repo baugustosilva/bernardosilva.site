@@ -451,17 +451,20 @@
     @media (max-width: 600px) {
       .gallery-grid { columns: 2; column-gap: 80px; }
       .gallery-item { margin-bottom: 80px; }
-      #nav-inner { padding: 2rem; }
+      #nav-inner {
+        padding: 2rem;
+        padding-top: 1.6rem;
+      }
       #nav-about-btn,
       #nav-close-btn {
-        top: 2rem;
-        right: 4rem;
+        top: auto;
+        bottom: -1.6rem;
+        right: 50%;
+        transform: translateX(50%);
         font-size: 1.4rem;
       }
       #nav-title-mini {
-        top: 2rem;
-        width: min(54.6vw, 18.9rem);
-        min-width: 14.7rem;
+        display: none;
       }
       #lightbox {
         --lightbox-main-height: 58vh;
@@ -478,10 +481,7 @@
       }
       #nav-title {
         width: 100%;
-      }
-      #nav-title-mini {
-        width: min(63vw, 14.7rem);
-        min-width: 11.55rem;
+        opacity: 1;
       }
     }
 
@@ -499,6 +499,12 @@
       }
       #nav-title {
         width: 100%;
+        opacity: 1;
+      }
+      #nav-about-btn,
+      #nav-close-btn {
+        bottom: -1.2rem;
+        font-size: 1.25rem;
       }
     }
   </style>
