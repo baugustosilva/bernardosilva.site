@@ -41,6 +41,8 @@
 
     body {
       --brand-color: #000000;
+      --site-gutter-left: 8rem;
+      --site-gutter-right: 8rem;
       margin: 0;
       padding: 0;
       background-color: rgba(255, 255, 255, 0.72);
@@ -72,8 +74,8 @@
       justify-content: center;
       align-items: center;
       padding-top: 3.5rem;
-      padding-left: 2.4rem;
-      padding-right: 2.4rem;
+      padding-left: var(--site-gutter-left);
+      padding-right: var(--site-gutter-right);
       padding-bottom: 2.4rem;
       pointer-events: none;
     }
@@ -220,7 +222,7 @@
 
     #about-text {
       max-width: 800px;
-      width: 88%;
+      width: calc(100% - var(--site-gutter-left) - var(--site-gutter-right));
       text-align: justify;
       font-family: Helvetica;
       font-size: 2rem;
@@ -243,8 +245,8 @@
 
     #gallery-wrap {
       padding-top: 113.775px;
-      padding-left: 2rem;
-      padding-right: 1.8rem;
+      padding-left: var(--site-gutter-left);
+      padding-right: var(--site-gutter-right);
       padding-bottom: 2rem;
     }
 
@@ -451,11 +453,17 @@
     }
 
     @media (max-width: 600px) {
+      body {
+        --site-gutter-left: 8rem;
+        --site-gutter-right: 8rem;
+      }
       .gallery-grid { columns: 2; column-gap: 80px; }
       .gallery-item { margin-bottom: 80px; }
       #nav-inner {
-        padding: 2rem;
         padding-top: 1.6rem;
+        padding-left: var(--site-gutter-left);
+        padding-right: var(--site-gutter-right);
+        padding-bottom: 2rem;
       }
       #nav-about-btn,
       #nav-close-btn {
@@ -488,6 +496,10 @@
     }
 
     @media (max-width: 400px) {
+      body {
+        --site-gutter-left: 8rem;
+        --site-gutter-right: 8rem;
+      }
       .gallery-grid { columns: 2; }
       #lightbox {
         --lightbox-main-height: 50vh;
@@ -622,6 +634,11 @@
 
       btnAbout.addEventListener('click', openAbout);
       btnClose.addEventListener('click', closeAbout);
+      overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+          closeAbout();
+        }
+      });
 
       function resetNavTitleMotion() {
         navTitle.classList.remove('is-active');
