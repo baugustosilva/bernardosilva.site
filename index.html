@@ -601,22 +601,22 @@
 
   <main id="gallery-wrap">
     <div class="gallery-grid" id="gallery">
-      <div class="gallery-item"><img src="img/grid/1985.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/7941015.webp" loading="lazy"></div>
-      <div class="gallery-item" data-gallery="20210906-Tapecaria-Aveia" data-start="0"><img src="img/grid/20210906-Tapecaria-Aveia-2148.webp" loading="lazy" decoding="async"></div>
-      <div class="gallery-item"><img src="img/grid/20220901-Enquanto0446.webp" loading="lazy"></div>
-      <div class="gallery-item" data-gallery="20230807-Tapecaria-Aveia" data-start="2"><img src="img/grid/20230807-Tapecaria-Aveia-3258.webp" loading="lazy" decoding="async"></div>
-      <div class="gallery-item"><img src="img/grid/20240419-Guaramao-0383.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/20240427-Copa-Cozinha-0800.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/20241106-Cozinha-Tupis-0612.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/20250627-Cozinha-Tupis-4226.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/20250627-Cozinha-Tupis-4349.webp" loading="lazy"></div>
-      <div class="gallery-item" data-gallery="20250724-Forno-da-Saudade" data-start="3"><img src="img/grid/20250724-Forno-da-Saudade-4992.webp" loading="lazy" decoding="async"></div>
-      <div class="gallery-item" data-gallery="20250724-Forno-da-Saudade" data-start="4"><img src="img/grid/20250724-Forno-da-Saudade-5044.webp" loading="lazy" decoding="async"></div>
-      <div class="gallery-item" data-gallery="20250918-Cafe-Nice" data-start="1"><img src="img/grid/20250918-Cafe-Nice-7921.webp" loading="lazy" decoding="async"></div>
-      <div class="gallery-item"><img src="img/grid/Casa-Alvorada-0128.webp" loading="lazy"></div>
-      <div class="gallery-item"><img src="img/grid/paodequeijo_bernardosilva_2024_001.webp" loading="lazy"></div>
-      <div class="gallery-item" data-gallery="20240228-Casinha-do-Jura" data-start="0"><img src="img/grid/20240228-Casinha-do-Jura.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/1985.webp" loading="lazy"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/7941015.webp" loading="lazy"></div>
+      <div class="gallery-item" data-gallery="20210906-Tapecaria-Aveia" data-start="0" data-site-variant="home produtos"><img src="img/grid/20210906-Tapecaria-Aveia-2148.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/20220901-Enquanto0446.webp" loading="lazy"></div>
+      <div class="gallery-item" data-gallery="20230807-Tapecaria-Aveia" data-start="2" data-site-variant="home produtos"><img src="img/grid/20230807-Tapecaria-Aveia-3258.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/20240419-Guaramao-0383.webp" loading="lazy"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/20240427-Copa-Cozinha-0800.webp" loading="lazy"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/20241106-Cozinha-Tupis-0612.webp" loading="lazy"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/20250627-Cozinha-Tupis-4226.webp" loading="lazy"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/20250627-Cozinha-Tupis-4349.webp" loading="lazy"></div>
+      <div class="gallery-item" data-gallery="20250724-Forno-da-Saudade" data-start="3" data-site-variant="home gastronomia"><img src="img/grid/20250724-Forno-da-Saudade-4992.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-gallery="20250724-Forno-da-Saudade" data-start="4" data-site-variant="home gastronomia"><img src="img/grid/20250724-Forno-da-Saudade-5044.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-gallery="20250918-Cafe-Nice" data-start="1" data-site-variant="home gastronomia"><img src="img/grid/20250918-Cafe-Nice-7921.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/Casa-Alvorada-0128.webp" loading="lazy"></div>
+      <div class="gallery-item" data-site-variant="home"><img src="img/grid/paodequeijo_bernardosilva_2024_001.webp" loading="lazy"></div>
+      <div class="gallery-item" data-gallery="20240228-Casinha-do-Jura" data-start="0" data-site-variant="home gastronomia"><img src="img/grid/20240228-Casinha-do-Jura.webp" loading="lazy" decoding="async"></div>
     </div>
   </main>
 
@@ -636,6 +636,63 @@
   <script>
     (function () {
       const gallery = document.getElementById('gallery');
+      const pageTitle = document.querySelector('title');
+      const pageDescription = document.querySelector('meta[name="description"]');
+      const ogTitle = document.querySelector('meta[property="og:title"]');
+      const ogDescription = document.querySelector('meta[property="og:description"]');
+      const twitterTitle = document.querySelector('meta[name="twitter:title"]');
+      const twitterDescription = document.querySelector('meta[name="twitter:description"]');
+      const allGalleryItems = Array.from(gallery.children);
+
+      const siteConfigs = {
+        home: {
+          title: 'Bernardo Silva',
+          description: 'Fotografia de gastronomia por Bernardo Silva. Um olhar atento à matéria, à luz e à presença concreta das coisas.'
+        },
+        gastronomia: {
+          title: 'Bernardo Silva - Gastronomia',
+          description: 'Selecao de fotografia de gastronomia por Bernardo Silva. Imagens guiadas por luz, matéria, gesto e presença.'
+        },
+        produtos: {
+          title: 'Bernardo Silva - Produtos',
+          description: 'Selecao de fotografia de produtos por Bernardo Silva. Imagens precisas, contidas e atentas à matéria e à forma.'
+        }
+      };
+
+      function getSiteVariant() {
+        const params = new URLSearchParams(window.location.search);
+        const queryVariant = params.get('site');
+        const hostname = window.location.hostname.toLowerCase();
+        const pathname = window.location.pathname.toLowerCase();
+        const normalizedQuery = queryVariant ? queryVariant.toLowerCase() : '';
+
+        if (normalizedQuery === 'gastronomia' || normalizedQuery === 'gastro') return 'gastronomia';
+        if (normalizedQuery === 'produtos' || normalizedQuery === 'produto') return 'produtos';
+        if (hostname.startsWith('gastronomia.')) return 'gastronomia';
+        if (hostname.startsWith('produtos.')) return 'produtos';
+        if (pathname.includes('/gastronomia')) return 'gastronomia';
+        if (pathname.includes('/produtos')) return 'produtos';
+        return 'home';
+      }
+
+      const currentSiteVariant = getSiteVariant();
+
+      function applySiteMetadata() {
+        const config = siteConfigs[currentSiteVariant] || siteConfigs.home;
+
+        if (pageTitle) pageTitle.textContent = config.title;
+        if (pageDescription) pageDescription.setAttribute('content', config.description);
+        if (ogTitle) ogTitle.setAttribute('content', config.title);
+        if (ogDescription) ogDescription.setAttribute('content', config.description);
+        if (twitterTitle) twitterTitle.setAttribute('content', config.title);
+        if (twitterDescription) twitterDescription.setAttribute('content', config.description);
+      }
+
+      function itemMatchesVariant(item) {
+        if (currentSiteVariant === 'home') return true;
+        const variants = (item.dataset.siteVariant || 'home').split(/\s+/).filter(Boolean);
+        return variants.includes(currentSiteVariant);
+      }
 
       function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -646,7 +703,8 @@
       }
 
       function shuffleGallery() {
-        const shuffledItems = shuffleArray(Array.from(gallery.children));
+        const visibleItems = allGalleryItems.filter(itemMatchesVariant);
+        const shuffledItems = shuffleArray(Array.from(visibleItems));
         const fragment = document.createDocumentFragment();
 
         shuffledItems.forEach((item) => {
@@ -657,6 +715,7 @@
         gallery.appendChild(fragment);
       }
 
+      applySiteMetadata();
       shuffleGallery();
 
       const overlay = document.getElementById('about-overlay');
