@@ -294,6 +294,41 @@
       padding-bottom: 2rem;
     }
 
+    #site-footer {
+      padding: 0 var(--site-gutter-right) 2rem var(--site-gutter-left);
+    }
+
+    .site-footer-nav {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+      font-family: Helvetica, Arial, sans-serif;
+      font-size: 1rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .site-footer-link {
+      color: inherit;
+      text-decoration: none;
+      opacity: 0.62;
+      transition: opacity 0.2s ease, font-size 0.2s ease;
+    }
+
+    .site-footer-link:hover,
+    .site-footer-link:focus-visible {
+      opacity: 1;
+    }
+
+    .site-footer-link.is-active {
+      font-weight: 700;
+      font-size: 1.08em;
+      opacity: 1;
+    }
+
     .gallery-grid {
       columns: 7;
       column-gap: 80px;
@@ -630,12 +665,21 @@
       <div class="gallery-item" data-gallery="20251009-Hacienda-1979" data-start="1" data-site-variant="home gastronomia"><img src="img/grid/20251009-Hacienda-1979-8304.webp" loading="lazy" decoding="async"></div>
       <div class="gallery-item" data-gallery="20251021-Cozinha-Tupis" data-start="5" data-site-variant="home gastronomia"><img src="img/grid/20251021-Cozinha-Tupis-8971.webp" loading="lazy" decoding="async"></div>
       <div class="gallery-item" data-gallery="20251114-Copa-Cozinha" data-start="9" data-site-variant="home gastronomia"><img src="img/grid/20251114-Copa-Cozinha-0410.webp" loading="lazy" decoding="async"></div>
+      <div class="gallery-item" data-gallery="20241022-Casa-Gabo" data-start="1" data-site-variant="home gastronomia"><img src="img/grid/20241022-Casa-Gabo-126.webp" loading="lazy" decoding="async"></div>
       <div class="gallery-item" data-site-variant="home gastronomia"><img src="img/grid/Casa-Alvorada-0128.webp" loading="lazy"></div>
       <div class="gallery-item" data-site-variant="home gastronomia"><img src="img/grid/paodequeijo_bernardosilva_2024_001.webp" loading="lazy"></div>
       <div class="gallery-item" data-site-variant="gastronomia"><img src="img/grid/paodequeijo_bernardosilva_2024_002.webp" loading="lazy"></div>
       <div class="gallery-item" data-gallery="20240228-Casinha-do-Jura" data-start="0" data-site-variant="home gastronomia"><img src="img/grid/20240228-Casinha-do-Jura.webp" loading="lazy" decoding="async"></div>
     </div>
   </main>
+
+  <footer id="site-footer" aria-label="Categorias">
+    <nav class="site-footer-nav">
+      <a class="site-footer-link" data-footer-variant="gastronomia" href="https://gastronomia.bernardosilva.site/">gastronomia</a>
+      <a class="site-footer-link" data-footer-variant="produtos" href="https://produtos.bernardosilva.site/">produtos</a>
+      <a class="site-footer-link" data-footer-variant="home" href="https://www.bernardosilva.site/">acervos</a>
+    </nav>
+  </footer>
 
   <div id="lightbox" role="dialog" aria-modal="true">
     <span id="lightbox-close" aria-label="Fechar">&#x2715;</span>
@@ -693,6 +737,19 @@
       }
 
       const currentSiteVariant = getSiteVariant();
+      const footerLinks = Array.from(document.querySelectorAll('#site-footer [data-footer-variant]'));
+
+      function applyFooterNavState() {
+        footerLinks.forEach((link) => {
+          const isActive = link.dataset.footerVariant === currentSiteVariant;
+          link.classList.toggle('is-active', isActive);
+          if (isActive) {
+            link.setAttribute('aria-current', 'page');
+          } else {
+            link.removeAttribute('aria-current');
+          }
+        });
+      }
 
       function applySiteMetadata() {
         const config = siteConfigs[currentSiteVariant] || siteConfigs.home;
@@ -733,6 +790,7 @@
       }
 
       applySiteMetadata();
+      applyFooterNavState();
       shuffleGallery();
 
       const overlay = document.getElementById('about-overlay');
@@ -971,6 +1029,13 @@
           'img/20240228-Casinha-do-Jura/20240228-Casinha-do-Jura-7116.webp',
           'img/20240228-Casinha-do-Jura/20240228-Casinha-do-Jura-7133.webp',
           'img/20240228-Casinha-do-Jura/20240228-Casinha-do-Jura-7139.webp'
+        ],
+        '20241022-Casa-Gabo': [
+          'img/20241022-Casa-Gabo/20241022-Casa-Gabo-028.webp',
+          'img/20241022-Casa-Gabo/20241022-Casa-Gabo-126.webp',
+          'img/20241022-Casa-Gabo/20241022-Casa-Gabo-288.webp',
+          'img/20241022-Casa-Gabo/20241022-Casa-Gabo-322.webp',
+          'img/20241022-Casa-Gabo/20241022-Casa-Gabo-417.webp'
         ],
         '20231006-Distribuidora-Goitacazes': [
           'img/20231006-Distribuidora-Goitacazes/20231006-Distribuidora-Goitacazes-4504.webp',
