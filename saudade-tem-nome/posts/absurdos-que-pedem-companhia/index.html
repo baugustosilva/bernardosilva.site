@@ -4,9 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex,nofollow">
-  <title>saudade tem nome</title>
+  <title>absurdos que pedem companhia</title>
   <meta name="description" content="saudade tem nome">
-  <link rel="icon" type="image/webp" href="../img/icon-bernardosilva.webp">
+  <link rel="icon" type="image/webp" href="../../../img/icon-bernardosilva.webp">
   <link rel="preconnect" href="https://type.cargo.site" crossorigin>
   <style>
     @font-face {
@@ -46,15 +46,17 @@
     }
 
     body:not(.is-unlocked) #nav,
-    body:not(.is-unlocked) #blog-wrap,
+    body:not(.is-unlocked) #post-wrap,
     body:not(.is-unlocked) #grain-canvas {
       display: none;
     }
 
-    img {
+    img,
+    video {
       border: 0;
       padding: 0;
       display: block;
+      width: 100%;
     }
 
     a {
@@ -229,72 +231,72 @@
       filter: blur(0.7px);
     }
 
-    #blog-wrap {
+    #post-wrap {
       padding-top: 113.775px;
       padding-left: var(--site-gutter-left);
       padding-right: var(--site-gutter-right);
       padding-bottom: 8rem;
     }
 
-    .post-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      column-gap: 80px;
-      row-gap: 80px;
-      width: 100%;
+    .post-shell {
+      max-width: 1280px;
+      margin: 0 auto;
     }
 
-    .post-card {
-      display: block;
-      cursor: pointer;
-    }
-
-    .post-image {
+    .post-video {
       aspect-ratio: 16 / 9;
       overflow: hidden;
+      margin-bottom: 6.4rem;
       background: rgba(0, 0, 0, 0.04);
     }
 
-    .post-image img,
-    .post-image video {
-      width: 100%;
+    .post-video video {
       height: 100%;
       object-fit: cover;
-      transition: transform 0.4s ease;
-      will-change: transform;
+      background: #000;
     }
 
-    .post-card:hover .post-image img,
-    .post-card:hover .post-image video {
-      transform: scale(1.03);
+    .post-video video:fullscreen,
+    .post-video video:-webkit-full-screen {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      background: #000;
     }
 
-    .post-card.is-bw .post-image img,
-    .post-card.is-bw .post-image video {
-      filter: grayscale(1);
-    }
-
-    .post-card.is-bw:hover .post-image img,
-    .post-card.is-bw:hover .post-image video {
-      filter: grayscale(0);
-    }
-
-    .post-title {
-      margin: 1.2rem 0 0;
-      font-family: Helvetica, Arial, sans-serif;
-      font-size: 1.55rem;
-      font-weight: 400;
-      line-height: 1.2;
+    .post-text {
+      max-width: 1180px;
+      margin-left: auto;
+      margin-right: auto;
+      font-family: "Courier New", Courier, monospace;
+      font-size: 1.8rem;
+      font-weight: 500;
+      line-height: 1.5;
       letter-spacing: 0.01em;
       text-align: justify;
-      text-align-last: justify;
       text-transform: lowercase;
     }
 
-    .post-title::after {
+    .post-text::after {
       content: "";
-      display: inline-block;
-      width: 100%;
+      display: block;
+      clear: both;
+    }
+
+    .post-text p {
+      margin: 0 0 1.4em;
+    }
+
+    .post-offset {
+      padding-left: 7.2rem;
+    }
+
+    .post-date {
+      text-align: right;
+    }
+
+    .post-text p:last-child {
+      margin-bottom: 0;
     }
 
     #grain-canvas {
@@ -307,22 +309,16 @@
       opacity: 0.42;
     }
 
-    @media (max-width: 900px) {
-      .post-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-
     @media (max-width: 600px) {
       body {
-        --site-gutter-left: 8rem;
-        --site-gutter-right: 8rem;
+        --site-gutter-left: 3.2rem;
+        --site-gutter-right: 3.2rem;
       }
 
       #nav-inner {
         padding-top: 1.6rem;
-        padding-left: var(--site-gutter-left);
-        padding-right: var(--site-gutter-right);
+        padding-left: 8rem;
+        padding-right: 8rem;
         padding-bottom: 2rem;
       }
 
@@ -335,13 +331,16 @@
         opacity: 1;
       }
 
-      #blog-wrap {
+      #post-wrap {
         padding-top: 113.775px;
       }
 
-      .post-grid {
-        grid-template-columns: 1fr;
-        row-gap: 80px;
+      .post-video {
+        margin-bottom: 5.6rem;
+      }
+
+      .post-text {
+        font-size: 1.55rem;
       }
     }
   </style>
@@ -356,64 +355,40 @@
 
   <nav id="nav" aria-label="saudade tem nome">
     <div id="nav-inner">
-      <div id="nav-title" aria-label="saudade tem nome">
-        <img id="nav-title-echo-a" class="nav-title-echo" src="img/saudade-titulo.png" alt="" aria-hidden="true" draggable="false">
-        <img id="nav-title-echo-b" class="nav-title-echo" src="img/saudade-titulo.png" alt="" aria-hidden="true" draggable="false">
-        <img id="nav-title-text" src="img/saudade-titulo.png" alt="saudade tem nome" draggable="false">
-      </div>
+      <a id="nav-title" href="../../" aria-label="saudade tem nome">
+        <img id="nav-title-echo-a" class="nav-title-echo" src="../../img/saudade-titulo.png" alt="" aria-hidden="true" draggable="false">
+        <img id="nav-title-echo-b" class="nav-title-echo" src="../../img/saudade-titulo.png" alt="" aria-hidden="true" draggable="false">
+        <img id="nav-title-text" src="../../img/saudade-titulo.png" alt="saudade tem nome" draggable="false">
+      </a>
       <div id="nav-title-mini" aria-hidden="true">
-        <img src="img/saudade-titulo.png" alt="" draggable="false">
+        <img src="../../img/saudade-titulo.png" alt="" draggable="false">
       </div>
     </div>
   </nav>
 
-    <main id="blog-wrap" aria-label="saudade tem nome">
-      <section class="post-grid" aria-label="posts">
-      <a class="post-card is-bw" href="posts/absurdos-que-pedem-companhia/">
-        <div class="post-image">
-          <video autoplay muted loop playsinline preload="metadata" aria-hidden="true">
-            <source src="img/posts/absurdos-que-pedem-companhia.mp4" type="video/mp4">
-          </video>
-        </div>
-        <h2 class="post-title">{absurdos que pedem companhia}</h2>
-      </a>
+  <main id="post-wrap" aria-label="absurdos que pedem companhia">
+    <article class="post-shell">
+      <div class="post-video" aria-label="vídeo">
+        <video controls playsinline preload="metadata">
+          <source src="../../img/posts/absurdos-que-pedem-companhia.mp4" type="video/mp4">
+        </video>
+      </div>
 
-      <a class="post-card is-bw" href="posts/garupa-de-moto/">
-        <div class="post-image">
-          <img src="img/posts/garupa-de-moto-cover.webp" alt="" loading="lazy" decoding="async">
-        </div>
-        <h2 class="post-title">{garupa de moto}</h2>
-      </a>
-
-      <a class="post-card is-bw" href="posts/quando-a-vida-resolve-se-mover/">
-        <div class="post-image">
-          <img src="img/posts/quando-a-vida-resolve-se-mover-cover.jpg" alt="" loading="lazy" decoding="async">
-        </div>
-        <h2 class="post-title">{quando a vida resolve se mover}</h2>
-      </a>
-
-      <a class="post-card" href="posts/salvador-ainda-guarda-voce/">
-        <div class="post-image">
-          <img src="img/posts/kenia-cover.png" alt="" loading="lazy" decoding="async">
-        </div>
-        <h2 class="post-title">{salvador ainda guarda você}</h2>
-      </a>
-
-      <a class="post-card is-bw" href="posts/acompanhar-voce-viver-e-bonito/">
-        <div class="post-image">
-          <img src="img/posts/bahia-05-09.jpg" alt="" loading="lazy" decoding="async">
-        </div>
-        <h2 class="post-title">{acompanhar você viver é bonito}</h2>
-      </a>
-
-      <a class="post-card" href="posts/quando-o-coracao-bate-ensaiado/">
-        <div class="post-image">
-          <img src="img/posts/bom-dia-kenia.jpg" alt="" loading="lazy" decoding="async">
-        </div>
-        <h2 class="post-title">{quando o coração bate ensaiado}</h2>
-      </a>
-
-    </section>
+      <div class="post-text">
+        <p>hoje, às quatro e meia da tarde, mais ou menos, fui ao farol com uma ideia na cabeça e uma teimosia que é característica minha. todo mundo que entende de mar dizia que não era hora, que a maré estava cheia demais, que o pico não ia prestar. pois fui assim mesmo, porque minha cabeça, quando resolve estudar uma coisa, vira uma coisa difícil de governar.</p>
+        <p>passei esses tempos querendo entender o farol como quem quer entender uma pessoa. vi no surfview que lá para stella o vento entrava de noroeste e fiquei convencido de que, para o farol, aquilo podia virar terral. acho que você consegue imaginar minha alegria besta: eu, sozinho, achando que tinha decifrado um segredo do mar.</p>
+        <p>e foi aí que senti sua falta.</p>
+        <p>eu me afundei na vontade de te contar meus absurdos, minhas teorias, minhas previsões meteorológicas de pessoa recém-obsessiva por um hiperfoco absurdo, só para você rir um pouco da minha cara. queria muito você do meu lado.</p>
+        <p>cheguei e a maré estava mais cheia do que eu queria, mas tinha ondulação entrando, isso tinha. fiquei ali olhando o mar com aquela mistura de encanto e curiosidade, como eu te olhava deitada nas pedras do porto da barra, em dezembro.</p>
+        <p>hoje eu surfei bem, pra minha régua. e não faltava testemunhas. havia muita gente em volta, como se todos tivessem combinado de assistir à minha pequena vergonha diante de um mar impecável. mas a verdade é que ninguém estava ligando para mim. estavam todos olhando o pôr do sol, que estava tão bonito que merecia seu nome como adjetivo: o céu estava kênia.</p>
+        <p>e então, veio do morro do farol um violão. prestei atenção e, era um luau de capital inicial. um luau de capital inicial.</p>
+        <p>ali eu quis você do meu lado de novo.</p>
+        <p>tem absurdo que só vale viver se é do seu lado, kênia. eu consegui ver nós dois esquecendo o mar por alguns minutos só para ficar com raiva do dinho ouro preto da bahia. o que era pra ser mágico, foi capital inicial. cover.</p>
+        <p>e pensei que talvez seja isso: eu posso estudar o mar de cabeça pra baixo, posso até acertar o horário em que o mar decide abrir. mas tem uma coisa que eu ainda não aprendi a resolver sozinho, que é viver mais um absurdo da vida sem querer ter do lado o tempo inteiro.</p>
+        <p>bom dia, kênia.</p>
+        <p>eu amo você.</p>
+      </div>
+    </article>
   </main>
 
   <canvas id="grain-canvas" aria-hidden="true"></canvas>
